@@ -16,12 +16,10 @@
       position: fixed;
       overflow-y: auto;
     }
-
+    
     .sidebar h2 {
-      text-align: center;
       padding: 20px;
-      border-bottom: 1px solid #333;
-      margin: 0;
+      margin-bottom: 10;
     }
 
     .sidebar a {
@@ -29,8 +27,13 @@
       padding: 15px 20px;
       text-decoration: none;
       color: #ccc;
-      border-bottom: 1px solid #333;
+      /* border-bottom: 1px solid #333; */
       transition: background 0.3s, color 0.3s;
+      /* background-color: #823131; */
+      border-radius: 10px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      margin-right: 8px;
     }
 
     .sidebar a:hover,
