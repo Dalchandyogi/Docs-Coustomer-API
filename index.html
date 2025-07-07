@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer API Docs</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="all">
+
+        <div class="sidebar">
+            <h2>API Docs</h2>
+            <a href="#add-customer" class="nav-link">Add Customer</a>
+            <a href="#get-customers" class="nav-link">Get Customers of an Agent</a>
+            <a href="#get-one-customer" class="nav-link">Get One Customer</a>
+            <a href="#update-customer" class="nav-link">Update Customer</a>
+            <a href="#upload-doc" class="nav-link">Upload Document</a>
+            <a href="#general-notes" class="nav-link">General Notes</a>
+        </div>
+
+        <main>
+            <h1>Customer API Documentation</h1>
+
+            <section id="add-customer">
+                <h2>1. Add Customer</h2>
+                <p><strong>Endpoint:</strong> <code>POST /add-customers/</code></p>
+                <p><strong>Purpose:</strong> Create a new customer. You can also add notes for the customer in the same request.</p>
+                <p><strong>How to Call:</strong></p>
+                <ul>
+                    <li>Method: POST</li>
+                    <li>URL: <code>https://api.privatecabin.in/add-customers</code></li>
+                    <li>Content-Type: application/json</li>
+                    <li>Body: JSON object with customer details and an optional list of notes.</li>
+                </ul>
+
+                <h3>Example Code</h3>
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button onclick="switchTab(this, 'tab-python-add')" class="active">Python</button>
+                        <button onclick="switchTab(this, 'tab-javascript-add')">JavaScript</button>
+                        <button onclick="switchTab(this, 'tab-kotlin-add')">Kotlin</button>
+                        <button onclick="switchTab(this, 'tab-dart-add')">Dart</button>
+                        <button onclick="switchTab(this, 'tab-curl-add')">cURL</button>
+                    </div>
+                    <div id="tab-python-add" class="tab-content active">
+                        <pre><code>import requests
+
+url = 'https://api.privatecabin.in/add-customers'
+data = {
+  "agent_id": 1,
+  "first_name": "John",
+  "notes": [{"content": "Sample note"}]
+}
+response = requests.post(url, json=data)
+print(response.json())</code></pre>
+                    </div>
+                    <div id="tab-javascript-add" class="tab-content">
+                        <pre><code>fetch('https://api.privatecabin.in/add-customers', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    agent_id: 1,
+    first_name: 'John',
+    notes: [{ content: 'Sample note' }]
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                    </div>
+                    <div id="tab-kotlin-add" class="tab-content">
+                        <pre><code>import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
+
+fun main() {
+    val client = OkHttpClient()
+    val json = """
+        {
+          "agent_id": 1,
+          "first_name": "John",
+          "notes": [{"content": "Sample note"}]
+        }
+    """.trimIndent()
+    val mediaType = "application/json".toMediaType()
+    val body = json.toRequestBody(mediaType)
+    val request = Request.Builder()
+        .url("https://api.privatecabin.in/add-customers")
+        .post(body)
+        .build()
+
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            response.use {
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                println(response.body?.string())
+            }
+        }
+    })
+}</code></pre>
+                    </div>
+                    <div id="tab-dart-add" class="tab-content">
+                        <pre><code>import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() async {
+  final url = Uri.parse('https://api.privatecabin.in/add-customers');
+  final headers = {'Content-Type': 'application/json'};
+  final body = jsonEncode({
+    'agent_id': 1,
+    'first_name': 'John',
+    'notes': [{'content': 'Sample note'}]
+  });
+
+  try {
+    final response = await http.post(url, headers: headers, body: body);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print(response.body);
+    } else {
+      print('Error: ${response.statusCode} - ${response.body}');
+    }
+  } catch (e) {
+    print('Exception: $e');
+  }
+}</code></pre>
+                    </div>
+                    <div id="tab-curl-add" class="tab-content">
+                        <pre><code>curl -X POST https://api.privatecabin.in/add-customers \
+  -H "Content-Type: application/json" \
+  -d '{"agent_id":1,"first_name":"John","notes":[{"content":"Sample note"}]}'</code></pre>
+                    </div>
+                </div>
+
+                <h3>Example Request Body</h3>
+                <pre><code>{
+  "agent_id": 1,
+  "salutation": "Mr.",
+  "first_name": "John",
+  "middle_name": "A.",
+  "last_name": "Doe",
+  "gender": "Male",
+  "date_of_birth": "1990-01-01",
+  "marital_status": "Single",
+  "occupation": "Engineer",
+  "mobile_number": "1234567890",
+  "mobile_number_2": "0987654321",
+  "email": "john.doe@example.com",
+  "aadhar_number": "123412341234",
+  "pan_number": "ABCDE1234F",
+  "gstin": "22AAAAA0000A1Z5",
+  "house_or_flat_number": "101",
+  "street_or_locality": "Main Street",
+  "landmark_or_area": "Near Park",
+  "pin_code": "123456",
+  "state": "StateName",
+  "city": "CityName",
+  "nominee_relation": "Brother",
+  "nominee_name": "Alex Doe",
+  "nominee_gender": "Male",
+  "nominee_dob": "1995-05-05",
+  "notes": [
+    { "content": "First note about the customer." },
+    { "content": "Second note." }
+  ]
+}</code></pre>
+
+                <h3>Example Success Response</h3>
+                <pre><code>{
+  "status": 201,
+  "message": "Customer added successfully",
+  "customer_id": 123
+}</code></pre>
+
+                <h3>Example Error Response</h3>
+                <pre><code>{
+  "status": 400,
+  "message": "Failed to add customer",
+  "details": "...error details..."
+}</code></pre>
+            </section>
+
+            
+
+            <section id="get-customers">
+                <h2>2. Get All Customers for an Agent</h2>
+                <p><strong>Endpoint:</strong> <code>GET /get-customers</code></p>
+                <p><strong>Purpose:</strong> Get all customers for a specific agent, including their notes and uploaded documents.</p>
+                <p><strong>How to Call:</strong></p>
+                <ul>
+                    <li>Method: GET</li>
+                    <li>URL: `/get-customers`</li>
+                    <li>Header: <code>Agent-Id: &lt;agent_id&gt;</code> (required)</li>
+                </ul>
+
+                <h3>Example Code</h3>
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button onclick="switchTab(this, 'tab-python-get-all')" class="active">Python</button>
+                        <button onclick="switchTab(this, 'tab-javascript-get-all')">JavaScript</button>
+                        <button onclick="switchTab(this, 'tab-kotlin-get-all')">Kotlin</button>
+                        <button onclick="switchTab(this, 'tab-dart-get-all')">Dart</button>
+                        <button onclick="switchTab(this, 'tab-curl-get-all')">cURL</button>
+                    </div>
+                    <div id="tab-python-get-all" class="tab-content active">
+                        <pre><code>import requests
+
+url = 'http://yourdomain.com/get-customers/'
+headers = {
+    'Agent-Id': '101'
+}
+response = requests.get(url, headers=headers)
+print(response.json())</code></pre>
+                    </div>
+                    <div id="tab-javascript-get-all" class="tab-content">
+                        <pre><code>fetch('http://yourdomain.com/get-customers/', {
+  method: 'GET',
+  headers: {
+    'Agent-Id': '101'
+  }
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                    </div>
+                    <div id="tab-kotlin-get-all" class="tab-content">
+                        <pre><code>import okhttp3.*
+import java.io.IOException
+
+fun main() {
+    val client = OkHttpClient()
+    val request = Request.Builder()
+        .url("http://yourdomain.com/get-customers/")
+        .header("Agent-Id", "101")
+        .get()
+        .build()
+
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            response.use {
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                println(response.body?.string())
+            }
+        }
+    })
+}</code></pre>
+                    </div>
+                    <div id="tab-dart-get-all" class="tab-content">
+                        <pre><code>import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() async {
+  final url = Uri.parse('http://yourdomain.com/get-customers/');
+  final headers = {'Agent-Id': '101'};
+
+  try {
+    final response = await http.get(url, headers: headers);
+    if (response.statusCode == 200) {
+      print(response.body);
+    } else {
+      print('Error: ${response.statusCode} - ${response.body}');
+    }
+  } catch (e) {
+    print('Exception: $e');
+  }
+}</code></pre>
+                    </div>
+                    <div id="tab-curl-get-all" class="tab-content">
+                        <pre><code>curl -X GET http://yourdomain.com/get-customers/ \
+  -H "Agent-Id: 101"</code></pre>
+                    </div>
+                </div>
+
+                <br>
+
+                <h3>Example Success Response:</h3>
+                <pre><code>{
+  "statusCode": 200,
+  "customers": [
+    {
+      "id": 1,
+      "agent_id": 101,
+      "salutation": "Mr.",
+      "first_name": "John",
+      "middle_name": "A.",
+      "last_name": "Doe",
+      "gender": "Male",
+      "date_of_birth": "1985-05-15",
+      "marital_status": "Married",
+      "occupation": "Engineer",
+      "mobile_number": "9876543210",
+      "mobile_number_2": "9988776655",
+      "email": "john.doe@example.com",
+      "aadhar_number": "123456789012",
+      "pan_number": "ABCDE1234F",
+      "gstin": "27ABCDE1234F1Z5",
+      "house_or_flat_number": "B-401",
+      "street_or_locality": "Green Park",
+      "landmark_or_area": "Near City Mall",
+      "pin_code": "302001",
+      "state": "Rajasthan",
+      "city": "Jaipur",
+      "nominee_relation": "Wife",
+      "nominee_name": "Jane Doe",
+      "nominee_gender": "Female",
+      "nominee_dob": "1988-11-22",
+      "notes": [
+        {
+          "id": 1,
+          "content": "Customer interested in new savings plans."
+        }
+      ],
+      "docs": [
+        {
+          "id": 5,
+          "document_type": "RC",
+          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_1_doc_516135d030def0d2.jpg"
+        },
+        {
+          "id": 6,
+          "document_type": "test",
+          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_1_doc_58ba57ee2e5d6441.jpg"
+        },
+        {
+          "id": 13,
+          "document_type": "pan",
+          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_1_doc_2474fa93525489ad.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "agent_id": 101,
+      "salutation": "Dr.",
+      "first_name": "Robert",
+      "middle_name": "L.",
+      "last_name": "Johnson",
+      "gender": "Male",
+      "date_of_birth": "1970-09-25",
+      "marital_status": "Divorced",
+      "occupation": "Doctor",
+      "mobile_number": "8765432109",
+      "mobile_number_2": "",
+      "email": "robert.j@example.com",
+      "aadhar_number": "456789012345",
+      "pan_number": "KLMNO9012P",
+      "gstin": "08KLMNO9012P2Z8",
+      "house_or_flat_number": "Flat 7B",
+      "street_or_locality": "Lake View Apartments",
+      "landmark_or_area": "",
+      "pin_code": "302003",
+      "state": "Rajasthan",
+      "city": "Jaipur",
+      "nominee_relation": "Son",
+      "nominee_name": "David Johnson",
+      "nominee_gender": "Male",
+      "nominee_dob": "2000-04-03",
+      "notes": [],
+      "docs": []
+    },
+    {
+      "id": 7,
+      "agent_id": 101,
+      "salutation": "Mr.",
+      "first_name": "Rahul",
+      "middle_name": "Kumar",
+      "last_name": "Sharma",
+      "gender": "Male",
+      "date_of_birth": "1990-05-15",
+      "marital_status": "Married",
+      "occupation": "Software Engineer",
+      "mobile_number": "9876543210",
+      "mobile_number_2": "9123456789",
+      "email": "rahul.sharma@example.com",
+      "aadhar_number": "123456089012",
+      "pan_number": "ABCDE1232F",
+      "gstin": "27AB1DE1234F1Z5",
+      "house_or_flat_number": "101",
+      "street_or_locality": "MG Road",
+      "landmark_or_area": "Near City Mall",
+      "pin_code": "400001",
+      "state": "Maharashtra",
+      "city": "Mumbai",
+      "nominee_relation": "Wife",
+      "nominee_name": "Pooja Sharma",
+      "nominee_gender": "Female",
+      "nominee_dob": "1992-08-10",
+      "notes": [
+        {
+          "id": 4,
+          "content": "Prefers weekend calls"
+        },
+        {
+          "id": 5,
+          "content": "Interested in family insurance plans"
+        }
+      ],
+      "docs": [
+        {
+          "id": 14,
+          "document_type": "PAN",
+          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_7_doc_1b82cc9772fd7406.jpg"
+        },
+        {
+          "id": 15,
+          "document_type": "Aadhar_Front",
+          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_7_doc_adb0e15d6042f470.jpg"
+        },
+        {
+          "id": 16,
+          "document_type": "Aadhar_Back",
+          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_7_doc_8cdeeedfb0122508.jpg"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+
+                <h3>Example Error Response:</h3>
+                <pre><code>{
+  "status": 404,
+  "message": "No customers found for the given agent ID"
+}</code></pre>
+            </section>
+
+            
+
+            <section id="get-one-customer">
+                <h2>3. Get One Customer by ID</h2>
+                <p><strong>Endpoint:</strong> <code>GET /get-one-customer?customer_id=&lt;id&gt;</code></p>
+                <p><strong>Purpose:</strong> Get a single customer's details, including notes and documents, by their customer ID.</p>
+                <p><strong>How to Call:</strong></p>
+                <ul>
+                    <li>Method: GET</li>
+                    <li>URL: `/get-one-customer?customer_id=123`</li>
+                </ul>
+
+                <h3>Example Code</h3>
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button onclick="switchTab(this, 'tab-python-get-one')" class="active">Python</button>
+                        <button onclick="switchTab(this, 'tab-javascript-get-one')">JavaScript</button>
+                        <button onclick="switchTab(this, 'tab-kotlin-get-one')">Kotlin</button>
+                        <button onclick="switchTab(this, 'tab-dart-get-one')">Dart</button>
+                        <button onclick="switchTab(this, 'tab-curl-get-one')">cURL</button>
+                    </div>
+                    <div id="tab-python-get-one" class="tab-content active">
+                        <pre><code>import requests
+
+customer_id = 123
+url = f'http://yourdomain.com/get-one-customer?customer_id={customer_id}'
+response = requests.get(url)
+print(response.json())</code></pre>
+                    </div>
+                    <div id="tab-javascript-get-one" class="tab-content">
+                        <pre><code>const customerId = 123;
+fetch(`http://yourdomain.com/get-one-customer?customer_id=${customerId}`, {
+  method: 'GET'
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                    </div>
+                    <div id="tab-kotlin-get-one" class="tab-content">
+                        <pre><code>import okhttp3.*
+import java.io.IOException
+
+fun main() {
+    val customerId = 123
+    val client = OkHttpClient()
+    val request = Request.Builder()
+        .url("http://yourdomain.com/get-one-customer?customer_id=$customerId")
+        .get()
+        .build()
+
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            response.use {
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                println(response.body?.string())
+            }
+        }
+    })
+}</code></pre>
+                    </div>
+                    <div id="tab-dart-get-one" class="tab-content">
+                        <pre><code>import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() async {
+  final customerId = 123;
+  final url = Uri.parse('http://yourdomain.com/get-one-customer?customer_id=$customerId');
+
+  try {
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      print(response.body);
+    } else {
+      print('Error: ${response.statusCode} - ${response.body}');
+    }
+  } catch (e) {
+    print('Exception: $e');
+  }
+}</code></pre>
+                    </div>
+                    <div id="tab-curl-get-one" class="tab-content">
+                        <pre><code>curl -X GET "http://yourdomain.com/get-one-customer?customer_id=123"</code></pre>
+                    </div>
+                </div>
+
+                <h3>Example Success Response:</h3>
+                <pre><code>{
+  "id": 123,
+  "agent_id": 1,
+  "salutation": "Mr.",
+  "first_name": "John",
+  "middle_name": "A.",
+  "last_name": "Doe",
+  "gender": "Male",
+  "date_of_birth": "1990-01-01",
+  "marital_status": "Single",
+  "occupation": "Engineer",
+  "mobile_number": "1234567890",
+  "mobile_number_2": "0987654321",
+  "email": "john.doe@example.com",
+  "aadhar_number": "123412341234",
+  "pan_number": "ABCDE1234F",
+  "gstin": "22AAAAA0000A1Z5",
+  "house_or_flat_number": "101",
+  "street_or_locality": "Main Street",
+  "landmark_or_area": "Near Park",
+  "pin_code": "123456",
+  "state": "StateName",
+  "city": "CityName",
+  "nominee_relation": "Brother",
+  "nominee_name": "Alex Doe",
+  "nominee_gender": "Male",
+  "nominee_dob": "1995-05-05",
+  "notes": [
+        {
+          "id": 1,
+          "content": "First note about the customer."
+        },
+        {
+          "id": 2,
+          "content": "Second note."
+        }
+   ],
+  "docs": [
+    {
+      "id": 10,
+      "document_type": "Aadhar Card",
+      "file_url": "http://yourdomain.com/uploaded_docs/customer_123_doc_abc123.jpg"
+    }
+  ]
+}</code></pre>
+
+                <h3>Example Error Response:</h3>
+                <pre><code>{
+  "status": 404,
+  "message": "Customer not found for the given ID"
+}</code></pre>
+            </section>
+
+            
+
+            <section id="update-customer">
+                <h2>4. Update Customer</h2>
+                <p><strong>Endpoint:</strong> <code>PUT /update-customer</code></p>
+                <p><strong>Purpose:</strong> Update an existing customer's details and notes.</p>
+                <p><strong>How to Call:</strong></p>
+                <ul>
+                    <li>Method: PUT</li>
+                    <li>URL: `/update-customer`</li>
+                    <li>Header: <code>Customer-Id: &lt;customer_id&gt;</code> (required)</li>
+                    <li>Body: JSON object with updated customer details and notes.</li>
+                </ul>
+
+                <h3>Example Code</h3>
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button onclick="switchTab(this, 'tab-python-update')" class="active">Python</button>
+                        <button onclick="switchTab(this, 'tab-javascript-update')">JavaScript</button>
+                        <button onclick="switchTab(this, 'tab-kotlin-update')">Kotlin</button>
+                        <button onclick="switchTab(this, 'tab-dart-update')">Dart</button>
+                        <button onclick="switchTab(this, 'tab-curl-update')">cURL</button>
+                    </div>
+                    <div id="tab-python-update" class="tab-content active">
+                        <pre><code>import requests
+
+customer_id = 123
+url = 'http://yourdomain.com/update-customer/'
+headers = {
+    'Customer-Id': str(customer_id),
+    'Content-Type': 'application/json'
+}
+data = {
+  "agent_id": 1,
+  "first_name": "JohnUpdated",
+  "notes": [{"content": "Updated note."}]
+}
+response = requests.put(url, headers=headers, json=data)
+print(response.json())</code></pre>
+                    </div>
+                    <div id="tab-javascript-update" class="tab-content">
+                        <pre><code>const customerId = 123;
+fetch('http://yourdomain.com/update-customer/', {
+  method: 'PUT',
+  headers: {
+    'Customer-Id': customerId,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    agent_id: 1,
+    first_name: 'JohnUpdated',
+    notes: [{ content: 'Updated note.' }]
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                    </div>
+                    <div id="tab-kotlin-update" class="tab-content">
+                        <pre><code>import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
+
+fun main() {
+    val customerId = 123
+    val client = OkHttpClient()
+    val json = """
+        {
+          "agent_id": 1,
+          "first_name": "JohnUpdated",
+          "notes": [{"content": "Updated note."}]
+        }
+    """.trimIndent()
+    val mediaType = "application/json".toMediaType()
+    val body = json.toRequestBody(mediaType)
+    val request = Request.Builder()
+        .url("http://yourdomain.com/update-customer/")
+        .header("Customer-Id", customerId.toString())
+        .put(body)
+        .build()
+
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            response.use {
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                println(response.body?.string())
+            }
+        }
+    })
+}</code></pre>
+                    </div>
+                    <div id="tab-dart-update" class="tab-content">
+                        <pre><code>import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() async {
+  final customerId = 123;
+  final url = Uri.parse('http://yourdomain.com/update-customer/');
+  final headers = {
+    'Customer-Id': customerId.toString(),
+    'Content-Type': 'application/json'
+  };
+  final body = jsonEncode({
+    'agent_id': 1,
+    'first_name': 'JohnUpdated',
+    'notes': [{'content': 'Updated note.'}]
+  });
+
+  try {
+    final response = await http.put(url, headers: headers, body: body);
+    if (response.statusCode == 200) {
+      print(response.body);
+    } else {
+      print('Error: ${response.statusCode} - ${response.body}');
+    }
+  } catch (e) {
+    print('Exception: $e');
+  }
+}</code></pre>
+                    </div>
+                    <div id="tab-curl-update" class="tab-content">
+                        <pre><code>curl -X PUT http://yourdomain.com/update-customer/ \
+  -H "Customer-Id: 123" \
+  -H "Content-Type: application/json" \
+  -d '{"agent_id":1,"first_name":"JohnUpdated","notes":[{"content":"Updated note."}]}'</code></pre>
+                    </div>
+                </div>
+
+                <h3>Example Request Body:</h3>
+                <pre><code>{
+  "agent_id": 1,
+  "salutation": "Mr.",
+  "first_name": "John",
+  "middle_name": "A.",
+  "last_name": "Doe",
+  "gender": "Male",
+  "date_of_birth": "1990-01-01",
+  "marital_status": "Single",
+  "occupation": "Engineer",
+  "mobile_number": "1234567890",
+  "mobile_number_2": "0987654321",
+  "email": "john.doe@example.com",
+  "aadhar_number": "123412341234",
+  "pan_number": "ABCDE1234F",
+  "gstin": "22AAAAA0000A1Z5",
+  "house_or_flat_number": "101",
+  "street_or_locality": "Main Street",
+  "landmark_or_area": "Near Park",
+  "pin_code": "123456",
+  "state": "StateName",
+  "city": "CityName",
+  "nominee_relation": "Brother",
+  "nominee_name": "Alex Doe",
+  "nominee_gender": "Male",
+  "nominee_dob": "1995-05-05",
+  "notes": [
+    { "content": "Updated note." }
+  ]
+}</code></pre>
+
+                <h3>Example Success Response:</h3>
+                <pre><code>{
+  "status_code": 200,
+  "message": "Customer updated successfully"
+}</code></pre>
+
+                <h3>Example Error Response:</h3>
+                <pre><code>{
+  "status": "400",
+  "error": "Failed to update customer: ...error details..."
+}</code></pre>
+            </section>
+
+            
+
+            <section id="upload-doc">
+                <h2>5. Upload Customer Document</h2>
+                <p><strong>Endpoint:</strong> <code>POST /upload_doc/</code></p>
+                <p><strong>Purpose:</strong> Upload a document (JPEG or PNG image) for a customer.</p>
+                <p><strong>How to Call:</strong></p>
+                <ul>
+                    <li>Method: POST</li>
+                    <li>URL: `/upload_doc/`</li>
+                    <li>Content-Type: <code>multipart/form-data</code></li>
+                    <li>Fields:
+                        <ul>
+                            <li><code>customer_id</code>: integer (required)</li>
+                            <li><code>document_type</code>: string (required, e.g., "Aadhar Card")</li>
+                            <li><code>file</code>: image file (required, JPEG or PNG)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Example Code</h3>
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button onclick="switchTab(this, 'tab-python-upload')" class="active">Python</button>
+                        <button onclick="switchTab(this, 'tab-javascript-upload')">JavaScript</button>
+                        <button onclick="switchTab(this, 'tab-kotlin-upload')">Kotlin</button>
+                        <button onclick="switchTab(this, 'tab-dart-upload')">Dart</button>
+                        <button onclick="switchTab(this, 'tab-curl-upload')">cURL</button>
+                    </div>
+                    <div id="tab-python-upload" class="tab-content active">
+                        <pre><code>import requests
+
+url = 'http://yourdomain.com/upload_doc/'
+customer_id = 123
+document_type = "Aadhar Card"
+file_path = "path/to/your/document.jpg" # Replace with your file path
+
+files = {
+    'file': open(file_path, 'rb')
+}
+data = {
+    'customer_id': customer_id,
+    'document_type': document_type
+}
+
+response = requests.post(url, files=files, data=data)
+print(response.json())</code></pre>
+                    </div>
+                    <div id="tab-javascript-upload" class="tab-content">
+                        <pre><code>const url = 'http://yourdomain.com/upload_doc/';
+const customerId = 123;
+const documentType = 'Aadhar Card';
+const fileInput = document.createElement('input'); // Imagine a file input element
+fileInput.type = 'file';
+// Simulate selecting a file (for demonstration purposes)
+// In a real scenario, this would come from a user selecting a file
+const dummyFile = new File(["dummy content"], "document.jpg", { type: "image/jpeg" }); 
+
+
+const formData = new FormData();
+formData.append('customer_id', customerId);
+formData.append('document_type', documentType);
+formData.append('file', dummyFile); // Use the actual file object from input
+
+fetch(url, {
+  method: 'POST',
+  body: formData
+})
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));</code></pre>
+                    </div>
+                    <div id="tab-kotlin-upload" class="tab-content">
+                        <pre><code>import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.io.IOException
+
+fun main() {
+    val client = OkHttpClient()
+    val customerId = 123
+    val documentType = "Aadhar Card"
+    val filePath = "path/to/your/document.jpg" // Replace with your file path
+    val file = File(filePath)
+
+    val requestBody = MultipartBody.Builder()
+        .setType(MultipartBody.FORM)
+        .addFormDataPart("customer_id", customerId.toString())
+        .addFormDataPart("document_type", documentType)
+        .addFormDataPart(
+            "file",
+            file.name,
+            file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        )
+        .build()
+
+    val request = Request.Builder()
+        .url("http://yourdomain.com/upload_doc/")
+        .post(requestBody)
+        .build()
+
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            response.use {
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                println(response.body?.string())
+            }
+        }
+    })
+}</code></pre>
+                    </div>
+                    <div id="tab-dart-upload" class="tab-content">
+                        <pre><code>import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'dart:convert';
+
+void main() async {
+  final url = Uri.parse('http://yourdomain.com/upload_doc/');
+  final customerId = 123;
+  final documentType = 'Aadhar Card';
+  final filePath = 'path/to/your/document.jpg'; // Replace with your file path
+
+  final request = http.MultipartRequest('POST', url)
+    ..fields['customer_id'] = customerId.toString()
+    ..fields['document_type'] = documentType
+    ..files.add(await http.MultipartFile.fromPath('file', filePath));
+
+  try {
+    final response = await request.send();
+    final responseBody = await response.stream.bytesToString();
+    if (response.statusCode == 200) {
+      print(responseBody);
+    } else {
+      print('Error: ${response.statusCode} - $responseBody');
+    }
+  } catch (e) {
+    print('Exception: $e');
+  }
+}</code></pre>
+                    </div>
+                    <div id="tab-curl-upload" class="tab-content">
+                        <pre><code>curl -X POST http://yourdomain.com/upload_doc/ \
+  -F "customer_id=123" \
+  -F "document_type=Aadhar Card" \
+  -F "file=@/path/to/your/document.jpg"</code></pre>
+                    </div>
+                </div>
+
+                <h3>Example Success Response:</h3>
+                <pre><code>{
+  "status": 200,
+  "message": "Document uploaded successfully",
+  "doc_id": 10,
+  "customer_id": 123,
+  "document_type": "Aadhar Card",
+  "file_url": "http://yourdomain.com/uploaded_docs/customer_123_doc_abc123.jpg"
+}</code></pre>
+
+                <h3>Example Error Response:</h3>
+                <pre><code>{
+  "status": 404,
+  "error": "The given customer ID is not found. Please Provide right customer ID."
+}</code></pre>
+            </section>
+
+            
+
+            <section id="general-notes">
+                <h2>General Notes</h2>
+                <ul>
+                    <li>All endpoints return JSON.</li>
+                    <li>For GET/PUT requests, use the required headers or query parameters as shown.</li>
+                    <li>For file uploads, use <code>multipart/form-data</code>.</li>
+                    <li>Document URLs in responses can be used directly in your app to display or download files.</li>
+                    <li>Handle error responses by checking the <code>status</code> or <code>error</code> fields in the response.</li>
+                </ul>
+                <p>If you need more help, contact the backend team.</p>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
