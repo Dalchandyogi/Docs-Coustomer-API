@@ -216,7 +216,7 @@ void main() async {
                     <div id="tab-python-get-all" class="tab-content active">
                         <pre><code>import requests
 
-url = 'http://yourdomain.com/get-customers/'
+url = 'https://api.privatecabin.in/get-customers'
 headers = {
     'Agent-Id': '101'
 }
@@ -224,7 +224,7 @@ response = requests.get(url, headers=headers)
 print(response.json())</code></pre>
                     </div>
                     <div id="tab-javascript-get-all" class="tab-content">
-                        <pre><code>fetch('http://yourdomain.com/get-customers/', {
+                        <pre><code>fetch('https://api.privatecabin.in/get-customers', {
   method: 'GET',
   headers: {
     'Agent-Id': '101'
@@ -240,7 +240,7 @@ import java.io.IOException
 fun main() {
     val client = OkHttpClient()
     val request = Request.Builder()
-        .url("http://yourdomain.com/get-customers/")
+        .url("https://api.privatecabin.in/get-customers")
         .header("Agent-Id", "101")
         .get()
         .build()
@@ -264,7 +264,7 @@ fun main() {
 import 'dart:convert';
 
 void main() async {
-  final url = Uri.parse('http://yourdomain.com/get-customers/');
+  final url = Uri.parse('https://api.privatecabin.in/get-customers');
   final headers = {'Agent-Id': '101'};
 
   try {
@@ -280,7 +280,7 @@ void main() async {
 }</code></pre>
                     </div>
                     <div id="tab-curl-get-all" class="tab-content">
-                        <pre><code>curl -X GET http://yourdomain.com/get-customers/ \
+                        <pre><code>curl -X GET https://api.privatecabin.in/get-customers \
   -H "Agent-Id: 101"</code></pre>
                     </div>
                 </div>
@@ -328,17 +328,17 @@ void main() async {
         {
           "id": 5,
           "document_type": "RC",
-          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_1_doc_516135d030def0d2.jpg"
+          "file_url": "http://api.privatecabin.in/uploaded_docs/customer_1_doc_516135d030def0d2.jpg"
         },
         {
           "id": 6,
           "document_type": "test",
-          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_1_doc_58ba57ee2e5d6441.jpg"
+          "file_url": "http://api.privatecabin.in/uploaded_docs/customer_1_doc_58ba57ee2e5d6441.jpg"
         },
         {
           "id": 13,
           "document_type": "pan",
-          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_1_doc_2474fa93525489ad.jpg"
+          "file_url": "http://api.privatecabin.in/uploaded_docs/customer_1_doc_2474fa93525489ad.jpg"
         }
       ]
     },
@@ -413,17 +413,17 @@ void main() async {
         {
           "id": 14,
           "document_type": "PAN",
-          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_7_doc_1b82cc9772fd7406.jpg"
+          "file_url": "http://api.privatecabin.in/uploaded_docs/customer_7_doc_1b82cc9772fd7406.jpg"
         },
         {
           "id": 15,
           "document_type": "Aadhar_Front",
-          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_7_doc_adb0e15d6042f470.jpg"
+          "file_url": "http://api.privatecabin.in/uploaded_docs/customer_7_doc_adb0e15d6042f470.jpg"
         },
         {
           "id": 16,
           "document_type": "Aadhar_Back",
-          "file_url": "http://127.0.0.1:8000/uploaded_docs/customer_7_doc_8cdeeedfb0122508.jpg"
+          "file_url": "http://api.privatecabin.in/uploaded_docs/customer_7_doc_8cdeeedfb0122508.jpg"
         }
       ]
     }
@@ -446,7 +446,7 @@ void main() async {
                 <p><strong>How to Call : </strong></p>
                 <ul>
                     <li>Method : GET</li>
-                    <li>URL : `/get-one-customer?customer_id=123`</li>
+                    <li>URL : <code>https://api.privatecabin.in/get-one-customer?customer_id={customer_id}</code></li>
                 </ul>
 
                 <h3>Example Code</h3>
@@ -462,13 +462,13 @@ void main() async {
                         <pre><code>import requests
 
 customer_id = 123
-url = f'http://yourdomain.com/get-one-customer?customer_id={customer_id}'
+url = f'https://api.privatecabin.in/get-one-customer?customer_id={customer_id}'
 response = requests.get(url)
 print(response.json())</code></pre>
                     </div>
                     <div id="tab-javascript-get-one" class="tab-content">
                         <pre><code>const customerId = 123;
-fetch(`http://yourdomain.com/get-one-customer?customer_id=${customerId}`, {
+fetch(`https://api.privatecabin.in/get-one-customer?customer_id={customer_id}`, {
   method: 'GET'
 })
 .then(res => res.json())
@@ -482,7 +482,7 @@ fun main() {
     val customerId = 123
     val client = OkHttpClient()
     val request = Request.Builder()
-        .url("http://yourdomain.com/get-one-customer?customer_id=$customerId")
+        .url("http://api.privatecabin.in/get-one-customer?customer_id=$customerId")
         .get()
         .build()
 
@@ -506,7 +506,7 @@ import 'dart:convert';
 
 void main() async {
   final customerId = 123;
-  final url = Uri.parse('http://yourdomain.com/get-one-customer?customer_id=$customerId');
+  final url = Uri.parse('http://api.privatecabin.in/get-one-customer?customer_id=$customerId');
 
   try {
     final response = await http.get(url);
@@ -521,7 +521,7 @@ void main() async {
 }</code></pre>
                     </div>
                     <div id="tab-curl-get-one" class="tab-content">
-                        <pre><code>curl -X GET "http://yourdomain.com/get-one-customer?customer_id=123"</code></pre>
+                        <pre><code>curl -X GET "http://api.privatecabin.in/get-one-customer?customer_id=123"</code></pre>
                     </div>
                 </div>
 
@@ -567,7 +567,7 @@ void main() async {
     {
       "id": 10,
       "document_type": "Aadhar Card",
-      "file_url": "http://yourdomain.com/uploaded_docs/customer_123_doc_abc123.jpg"
+      "file_url": "http://api.privatecabin.in/uploaded_docs/customer_123_doc_abc123.jpg"
     }
   ]
 }</code></pre>
@@ -588,7 +588,7 @@ void main() async {
                 <p><strong>How to Call :</strong></p>
                 <ul>
                     <li>Method : PUT</li>
-                    <li>URL : `/update-customer`</li>
+                    <li>URL : <code>https://api.privatecabin.in/update-customer</code></li>
                     <li>Header : <code>Customer-Id: &lt;customer_id&gt;</code> (required)</li>
                     <li>Body : JSON object with updated customer details and notes.</li>
                 </ul>
@@ -606,7 +606,7 @@ void main() async {
                         <pre><code>import requests
 
 customer_id = 123
-url = 'http://yourdomain.com/update-customer/'
+url = 'https://api.privatecabin.in/update-customer'
 headers = {
     'Customer-Id': str(customer_id),
     'Content-Type': 'application/json'
@@ -621,7 +621,7 @@ print(response.json())</code></pre>
                     </div>
                     <div id="tab-javascript-update" class="tab-content">
                         <pre><code>const customerId = 123;
-fetch('http://yourdomain.com/update-customer/', {
+fetch('https://api.privatecabin.in/update-customer', {
   method: 'PUT',
   headers: {
     'Customer-Id': customerId,
@@ -655,7 +655,7 @@ fun main() {
     val mediaType = "application/json".toMediaType()
     val body = json.toRequestBody(mediaType)
     val request = Request.Builder()
-        .url("http://yourdomain.com/update-customer/")
+        .url("https://api.privatecabin.in/update-customer")
         .header("Customer-Id", customerId.toString())
         .put(body)
         .build()
@@ -680,7 +680,7 @@ import 'dart:convert';
 
 void main() async {
   final customerId = 123;
-  final url = Uri.parse('http://yourdomain.com/update-customer/');
+  final url = Uri.parse('https://api.privatecabin.in/update-customer');
   final headers = {
     'Customer-Id': customerId.toString(),
     'Content-Type': 'application/json'
@@ -704,7 +704,7 @@ void main() async {
 }</code></pre>
                     </div>
                     <div id="tab-curl-update" class="tab-content">
-                        <pre><code>curl -X PUT http://yourdomain.com/update-customer/ \
+                        <pre><code>curl -X PUT https://api.privatecabin.in/update-customer \
   -H "Customer-Id: 123" \
   -H "Content-Type: application/json" \
   -d '{"agent_id":1,"first_name":"JohnUpdated","notes":[{"content":"Updated note."}]}'</code></pre>
@@ -765,7 +765,7 @@ void main() async {
                 <p><strong>How to Call : </strong></p>
                 <ul>
                     <li>Method: POST</li>
-                    <li>URL : `/upload_doc/`</li>
+                    <li>URL : <code>https://api.privatecabin.in/upload_doc/</code></li>
                     <li>Content-Type : <code>multipart/form-data</code></li>
                     <li>Fields :
                         <ul>
@@ -788,7 +788,7 @@ void main() async {
                     <div id="tab-python-upload" class="tab-content active">
                         <pre><code>import requests
 
-url = 'http://yourdomain.com/upload_doc/'
+url = 'https://api.privatecabin.in/upload_doc'
 customer_id = 123
 document_type = "Aadhar Card"
 file_path = "path/to/your/document.jpg" # Replace with your file path
@@ -805,7 +805,7 @@ response = requests.post(url, files=files, data=data)
 print(response.json())</code></pre>
                     </div>
                     <div id="tab-javascript-upload" class="tab-content">
-                        <pre><code>const url = 'http://yourdomain.com/upload_doc/';
+                        <pre><code>const url = 'https://api.privatecabin.in/upload_doc';
 const customerId = 123;
 const documentType = 'Aadhar Card';
 const fileInput = document.createElement('input'); // Imagine a file input element
@@ -854,7 +854,7 @@ fun main() {
         .build()
 
     val request = Request.Builder()
-        .url("http://yourdomain.com/upload_doc/")
+        .url("https://api.privatecabin.in/upload_doc")
         .post(requestBody)
         .build()
 
@@ -878,7 +878,7 @@ import 'dart:io';
 import 'dart:convert';
 
 void main() async {
-  final url = Uri.parse('http://yourdomain.com/upload_doc/');
+  final url = Uri.parse('https://api.privatecabin.in/upload_doc');
   final customerId = 123;
   final documentType = 'Aadhar Card';
   final filePath = 'path/to/your/document.jpg'; // Replace with your file path
@@ -902,7 +902,7 @@ void main() async {
 }</code></pre>
                     </div>
                     <div id="tab-curl-upload" class="tab-content">
-                        <pre><code>curl -X POST http://yourdomain.com/upload_doc/ \
+                        <pre><code>curl -X POST https://api.privatecabin.in/upload_doc \
   -F "customer_id=123" \
   -F "document_type=Aadhar Card" \
   -F "file=@/path/to/your/document.jpg"</code></pre>
@@ -916,7 +916,7 @@ void main() async {
   "doc_id": 10,
   "customer_id": 123,
   "document_type": "Aadhar Card",
-  "file_url": "http://yourdomain.com/uploaded_docs/customer_123_doc_abc123.jpg"
+  "file_url": "http://api.privatecabin.in/uploaded_docs/customer_123_doc_abc123.jpg"
 }</code></pre>
 
                 <h3>Example Error Response:</h3>
